@@ -1,0 +1,9 @@
+name: parser_error
+version: 0.0.1
+author: Andrew Mezoni <andrew.mezoni@gmail.com>
+description: Parser error formatter with support for the multiple source code parts.
+homepage: https://github.com/mezoni/parser_error
+dependencies:
+  text: any
+dev_dependencies:
+  unittest: any
