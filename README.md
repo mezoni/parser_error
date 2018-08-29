@@ -1,7 +1,7 @@
 #parser_error
 ==========
 
-Version: 0.0.1
+Version: 0.1.0
 
 **Main purpose**
 
@@ -13,7 +13,7 @@ Example:
 import "package:parser_error/parser_error.dart";
 
 void main() {
-  var messages = [];
+  var messages = <ParserErrorMessage>[];
   var message = new ParserErrorMessage("Malformed 'type'", 25, 30);
   messages.add(message);
   message = new ParserErrorMessage("Expected ']' but found '`'", 29, 29);
