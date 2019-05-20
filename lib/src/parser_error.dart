@@ -1,19 +1,13 @@
 part of parser_error;
 
 class ParserErrorMessage {
-  /**
-   * End position of error.
-   */
+  /// End position of error.
   final int end;
 
-  /**
-   * Error message.
-   */
+  /// Error message.
   final String message;
 
-  /**
-   * Start position of error.
-   */
+  /// Start position of error.
   final int start;
 
   ParserErrorMessage(this.message, this.start, this.end) {
@@ -32,26 +26,25 @@ class ParserErrorMessage {
 }
 
 class ParserErrorFormatter {
-  /**
-   * Returns formatted error as strings.
-   *
-   * Parameters:
-   *   [String] source
-   *   Text of source code.
-   *
-   *   [List]<[ParserErrorMessage]> error
-   *   List of parser error messages.
-   *
-   *   [int] lineLimit
-   *   Length limit of the formatted line.
-   *
-   *   [int] offset
-   *   Offset to be added to the values "start" and "end".
-   *
-   *   [String] title
-   *   Title of parser error
-   */
-  static List<String> format(String source, List<ParserErrorMessage> messages, {int lineLimit: 80, int offset: 0, String title: "Format exception"}) {
+  /// Returns formatted error as strings.
+  ///
+  /// Parameters:
+  ///   [String] source
+  ///   Text of source code.
+  ///
+  ///   [List]<[ParserErrorMessage]> error
+  ///   List of parser error messages.
+  ///
+  ///   [int] lineLimit
+  ///   Length limit of the formatted line.
+  ///
+  ///   [int] offset
+  ///   Offset to be added to the values "start" and "end".
+  ///
+  ///   [String] title
+  ///   Title of parser error
+  static List<String> format(String source, List<ParserErrorMessage> messages,
+      {int lineLimit = 80, int offset = 0, String title = "Format exception"}) {
     if (source == null) {
       throw new ArgumentError.notNull("source");
     }
