@@ -11,16 +11,12 @@ class ParserErrorMessage {
   final int start;
 
   ParserErrorMessage(this.message, this.start, this.end) {
-    if (message == null) {
-      throw new ArgumentError.notNull("message");
+    if (end < 0) {
+      throw ArgumentError.value(end, 'end');
     }
 
-    if (end == null || end < 0) {
-      throw new ArgumentError.value(end, "end");
-    }
-
-    if (start == null || start < 0 || start > end) {
-      throw new ArgumentError.value(start, "start");
+    if (start < 0 || start > end) {
+      throw ArgumentError.value(start, 'start');
     }
   }
 }
@@ -44,29 +40,17 @@ class ParserErrorFormatter {
   ///   [String] title
   ///   Title of parser error
   static List<String> format(String source, List<ParserErrorMessage> messages,
-      {int lineLimit = 80, int offset = 0, String title = "Format exception"}) {
-    if (source == null) {
-      throw new ArgumentError.notNull("source");
+      {int lineLimit = 80, int offset = 0, String title = 'Format exception'}) {
+    if (lineLimit < 1) {
+      throw ArgumentError.value(lineLimit, 'lineLimit');
     }
 
-    if (messages == null) {
-      throw new ArgumentError.notNull("messages");
-    }
-
-    if (lineLimit == null || lineLimit < 1) {
-      throw new ArgumentError.value(lineLimit, "lineLimit");
-    }
-
-    if (offset == null || offset < 0) {
-      throw new ArgumentError.value(offset, "offset");
-    }
-
-    if (title == null) {
-      throw new ArgumentError.notNull("title");
+    if (offset < 0) {
+      throw ArgumentError.value(offset, 'offset');
     }
 
     var result = <String>[];
-    var text = new Text(source);
+    var text = Text(source);
     var sourceLength = source.length;
     for (var error in messages) {
       var position = error.end + offset;
@@ -74,22 +58,25 @@ class ParserErrorFormatter {
         position = error.start + offset;
       }
 
-      Location location;
-      Line line;
-      var locationString = "";
+      Location? location;
+      Line? line;
+      var locationString = '';
       if (position < sourceLength) {
         line = text.lineAt(position);
         location = text.locationAt(position);
-        locationString = " (${location.toString()})";
+        locationString = ' (${location.toString()})';
       }
 
-      result.add("$title$locationString: ${error.message}");
+      result.add('$title$locationString: ${error.message}');
       if (line != null) {
-        var string = new String.fromCharCodes(line.characters);
-        string = string.replaceAll("\n", "");
-        string = string.replaceAll("\r", "");
+        var string = String.fromCharCodes(line.characters);
+        string = string.replaceAll('\n', '');
+        string = string.replaceAll('\r', '');
         var indicatorLength = 1;
-        var indicatorPosition = location.column - 1;
+        var indicatorPosition = 0;
+        if (location != null) {
+          indicatorPosition = location.column - 1;
+        }
         if (error.end != error.start) {
           indicatorLength = error.end - error.start;
         }
@@ -113,9 +100,9 @@ class ParserErrorFormatter {
           string = string.substring(0, lineLimit);
         }
 
-        var prefix = "".padRight(indicatorPosition, " ");
-        var suffix = "".padRight(indicatorLength, "^");
-        var indicator = "$prefix$suffix";
+        var prefix = ''.padRight(indicatorPosition, ' ');
+        var suffix = ''.padRight(indicatorLength, '^');
+        var indicator = '$prefix$suffix';
         result.add(string);
         result.add(indicator);
       }
