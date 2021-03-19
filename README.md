@@ -1,7 +1,7 @@
 #parser_error
 ==========
 
-Version: 0.1.1
+Version: 0.2.0
 
 **Main purpose**
 
