@@ -49,9 +49,9 @@ class ParserErrorFormatter {
       throw ArgumentError.value(offset, 'offset');
     }
 
-    var result = <String>[];
-    var text = Text(source);
-    var sourceLength = source.length;
+    final result = <String>[];
+    final text = Text(source);
+    final sourceLength = source.length;
     for (var error in messages) {
       var position = error.end + offset;
       if (error.start != error.end) {
@@ -87,7 +87,7 @@ class ParserErrorFormatter {
 
         if (indicatorPosition + indicatorLength > lineLimit) {
           if (indicatorPosition < lineLimit || indicatorLength < lineLimit) {
-            var delta = (indicatorPosition + indicatorLength) - lineLimit;
+            final delta = (indicatorPosition + indicatorLength) - lineLimit;
             string = string.substring(delta);
             indicatorPosition -= delta;
           } else {
@@ -100,9 +100,9 @@ class ParserErrorFormatter {
           string = string.substring(0, lineLimit);
         }
 
-        var prefix = ''.padRight(indicatorPosition, ' ');
-        var suffix = ''.padRight(indicatorLength, '^');
-        var indicator = '$prefix$suffix';
+        final prefix = ''.padRight(indicatorPosition, ' ');
+        final suffix = ''.padRight(indicatorLength, '^');
+        final indicator = '$prefix$suffix';
         result.add(string);
         result.add(indicator);
       }
