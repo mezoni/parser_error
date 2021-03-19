@@ -1,12 +1,12 @@
 name: parser_error
-version: 0.1.1
+version: 0.2.0
 author: Andrew Mezoni <andrew.mezoni@gmail.com>
 description: Parser error formatter with support for the multiple source code parts.
 homepage: https://github.com/mezoni/parser_error
 environment:
-  sdk: '>=2.0.0 <3.0.0'
+  sdk: '>=2.12.0 <3.0.0'
 dependencies:
-  text: ^0.1.1
+  text: ^0.2.0
 dev_dependencies:
   pedantic: any
   test: ^1.6.3
